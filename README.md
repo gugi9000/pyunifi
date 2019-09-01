@@ -1,5 +1,5 @@
 [![PyPI version](https://badge.fury.io/py/pyunifi.svg)](https://badge.fury.io/py/pyunifi)
-[![Build Status](https://travis-ci.com/finish06/pyunifi.svg?branch=master)](https://travis-ci.com/finish06/pyunifi)
+[![Build Status](https://travis-ci.org/finish06/pyunifi.svg?branch=master)](https://travis-ci.org/finish06/pyunifi)
 
 
 PyUnifi
@@ -173,6 +173,32 @@ Unauthorize a guest based on his MAC address.
 Set client alias. Use "" to reset to the default.
   - mac: The target MAC: aa:bb:cc:dd:ee:ff
   - alias: The alias to set
+
+### `create_voucher(self, number, quota, expire, up_bandwidth=None, down_bandwidth=None, byte_quota=None, note=None)`
+Create voucher for guests. Return list of new vouchers.
+
+  - `number`          -- number of vouchers
+  - `quota`           -- maximal number of using; 0 = unlimited
+  - `expire`          -- expiration of vouchers in minutes
+  - `up_bandwidth`    -- up speed allowed in kbps (optional)
+  - `down_bandwidth`  -- down speed allowed in kbps (optional)
+  - `byte_quota`      -- quantity of bytes allowed in MB (optional)
+  - `note`            -- description of vouchers (optional)
+
+### `list_vouchers(self, **filter)`
+Get list of vouchers.
+
+  - `filter`  --  Voucher filter  (create_time, code, quota, used, note, status_expires, status, ...)
+
+```
+  c.list_vouchers(code='12345-67890')
+```
+
+### `delete_voucher(self, id)`
+Delete / revoke voucher.
+
+  - `id`    -- voucher id
+
 
 Utilities
 ---------
